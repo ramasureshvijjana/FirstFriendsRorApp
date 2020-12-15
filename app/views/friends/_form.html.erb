@@ -1,0 +1,48 @@
+<%= form_with(model: friend, local: true) do |form| %>
+  <% if friend.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(friend.errors.count, "error") %> prohibited this friend from being saved:</h2>
+
+      <ul>
+        <% friend.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :first_name, placeholder: "Enter your Name", required: true, class:"form-control"%>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :surname, placeholder: "Enter your surname", required: true, class:"form-control",type:'text_field' %>
+  </div>
+
+  <div class="field form-group">
+   
+    <%= form.text_field :phone, placeholder: "Enter your Mobile number", required: true, class:"form-control", type:'number' %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :email, placeholder: "Enter your Email", required: true, class:"form-control", type:'email' %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.date_field :birthday, as: :date, value: form.object.try(:strftime,"%m/%d/%Y"), required: true, class:"form-control"%>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.number_field :user_id, id: :friend_user_id, value: current_user.id, required: true, class:"form-control", type: :hidden%>
+     
+  </div>
+  <div class="actions form-group">
+    <%= form.submit class:"btn btn-success"%>
+  </div>
+  <hr class="my-4">
+<% end %>
